@@ -4,7 +4,7 @@
 
 ## 🧠 py.ai Content Repository
 
-Welcome to the Py.AI content repository — the open-source database that powers the [Py.AI](https://py.ai) website.
+Welcome to the Py.AI content repository, the open-source database that powers the [Py.AI](https://py.ai) website.
 
 Py.AI is a community-driven knowledge source focused on Python 🐍 and Artificial Intelligence 🤖.  
 Its purpose is to gather clear, structured information about:

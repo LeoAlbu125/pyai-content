@@ -1,0 +1,135 @@
+name: "Alembic"
+slug: "alembic"
+headline: "Lightweight database migration tool for SQLAlchemy."
+urls:
+  - label: "GitHub"
+    url: "https://github.com/sqlalchemy/alembic"
+  - label: "Docs"
+    url: "https://alembic.sqlalchemy.org/"
+  - label: "PyPI"
+    url: "https://pypi.org/project/alembic/"
+overview: |
+  **Alembic** is a lightweight database migration tool for use with **SQLAlchemy**, built by the same author. It lets you version your database schema the same way you version your code — generating incremental migration scripts that upgrade or downgrade a database between states, so schema changes can be reviewed, tracked in Git, and applied consistently across development, staging, and production environments.
+description: |
+  ## 💡 Core Capabilities
+
+  | Capability                | Description                                                                                      |
+  |--------------------------|------------------------------------------------------------------------------------------------|
+  | **📜 Versioned Migrations**  | Each schema change is a Python script with `upgrade()` and `downgrade()` functions.              |
+  | **🔍 Autogenerate**          | Compares your SQLAlchemy models to the live database and drafts migration scripts automatically. |
+  | **🌿 Branching & Merging**   | Supports multiple migration heads for parallel feature branches, later merged into one history.  |
+  | **⬆️⬇️ Upgrade/Downgrade**    | Move the database forward or roll it back to any prior revision on demand.                       |
+  | **🧩 Multi-Database Support**| Manage migrations across multiple databases or schemas from one project.                          |
+  | **⚙️ Environment Config**    | `env.py` lets you customize how migrations connect and run per environment.                       |
+
+  ---
+
+  ## 🎯 Key Use Cases
+
+  Alembic is essential wherever a SQLAlchemy-backed application needs its schema to evolve safely over time:
+
+  - **🚀 Application Deployment**: Ship schema changes alongside code releases with a repeatable, auditable process.
+
+  - **👥 Team Collaboration**: Track schema history in version control so every developer applies the same changes in order.
+
+  - **↩️ Safe Rollbacks**: Downgrade a problematic migration in production without hand-writing reverse SQL.
+
+  - **🧪 CI/CD Pipelines**: Automatically apply migrations as part of test setup or deployment automation.
+
+  ---
+
+  ## 🌟 Why People Use Alembic
+
+  - **Built for SQLAlchemy**: Reads your declarative models directly, so migrations stay in sync with your ORM code.
+
+  - **Autogenerate Saves Time**: Drafts most migration boilerplate for you — you review and adjust rather than write from scratch.
+
+  - **Explicit & Reviewable**: Every migration is a plain Python file you can read, edit, and review in a pull request.
+
+  - **Mature & Stable**: The de facto standard migration tool in the SQLAlchemy ecosystem for over a decade.
+
+  ---
+
+  ## 🔗 Integration with Other Tools
+
+  Alembic plugs directly into the SQLAlchemy-centered stack:
+
+  - **🗺️ SQLAlchemy**: Reads `Base.metadata` from your models to autogenerate migrations.
+
+  - **🌐 Web Frameworks**: Commonly used with `FastAPI` and `Flask` apps to manage their database schema.
+
+  - **🔄 CI/CD**: Run `alembic upgrade head` as a deployment step in GitHub Actions, GitLab CI, or Docker entrypoints.
+
+  - **🐳 Containers**: Frequently invoked in Docker Compose or Kubernetes init containers before an app starts.
+
+  ---
+
+  ## ⚙️ Technical Overview
+
+  Alembic organizes migrations as a linear (or branching) chain of revision scripts stored in a `versions/` directory.
+
+  - **📁 Migration Environment**: `env.py` defines how Alembic connects to the database and loads your models' metadata.
+  - **📝 Revision Scripts**: Each file has a unique revision ID, a `down_revision` pointer, and `upgrade()`/`downgrade()` functions.
+  - **🔍 Autogenerate Diffing**: Compares current model metadata against the database's actual schema to propose changes.
+  - **📌 Version Table**: Alembic tracks the current schema version in an `alembic_version` table inside the database itself.
+
+  ---
+
+  ## 🐍 Python Example
+
+  Here's what a typical Alembic migration script looks like:
+
+  ```python
+  """add is_active column to users
+
+  Revision ID: 3f8a1c9e2b7d
+  Revises: 1a2b3c4d5e6f
+  """
+  from alembic import op
+  import sqlalchemy as sa
+
+  revision = "3f8a1c9e2b7d"
+  down_revision = "1a2b3c4d5e6f"
+
+  def upgrade():
+      op.add_column("users", sa.Column("is_active", sa.Boolean(), nullable=False, server_default="true"))
+
+  def downgrade():
+      op.drop_column("users", "is_active")
+  ```
+
+  Typical CLI workflow:
+
+  ```bash
+  alembic revision --autogenerate -m "add is_active column to users"
+  alembic upgrade head
+  alembic downgrade -1
+  ```
+
+  ---
+
+  ## 🏆 Alternatives & Comparison
+
+  | Tool                | Strengths                                       | Notes                                   |
+  |----------------------|-------------------------------------------------|------------------------------------------|
+  | **Alembic**          | Deep SQLAlchemy integration, mature, autogenerate | The standard choice for SQLAlchemy apps  |
+  | **Django Migrations**| Built into Django, simple for Django ORM         | Coupled to the Django framework          |
+  | **Flyway**           | Language-agnostic, SQL-first migrations          | Java-based tooling, less Pythonic        |
+  | **yoyo-migrations**  | Minimal, framework-agnostic                      | Fewer features than Alembic              |
+
+  > **Note:** Alembic is free and open-source (MIT license), with no usage costs beyond the database itself.
+
+  ---
+
+  ## 🐍 Python Ecosystem Relevance
+
+  - **SQLAlchemy:** Alembic is SQLAlchemy's official migration companion, maintained by the same author.
+  - **Web Frameworks:** Standard choice for schema management in `FastAPI` and `Flask` applications.
+  - **Testing:** Used in test suites to spin up a schema at a known revision before running tests.
+  - **DevOps:** Commonly wired into Docker entrypoints and CI/CD pipelines to apply migrations automatically on deploy.
+
+  ---
+
+  ## 🔚 Summary
+
+  **Alembic** brings Git-like version control to your database schema. By generating reviewable, revertible migration scripts straight from your SQLAlchemy models, it makes schema evolution safe, auditable, and repeatable — a small but essential tool for any Python project where the database needs to change as reliably as the code that talks to it.

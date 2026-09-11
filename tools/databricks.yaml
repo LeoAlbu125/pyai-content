@@ -1,0 +1,124 @@
+name: "Databricks"
+slug: "databricks"
+headline: "Unified data, analytics, and AI platform built on Apache Spark and the lakehouse architecture."
+urls:
+  - label: "Official Site"
+    url: "https://www.databricks.com/"
+  - label: "Docs"
+    url: "https://docs.databricks.com/"
+  - label: "GitHub"
+    url: "https://github.com/databricks"
+overview: |
+  **Databricks** is a cloud-based **lakehouse platform** that unifies data engineering, data warehousing, and machine learning in a single environment. Built by the original creators of **Apache Spark**, it combines the low-cost, flexible storage of a data lake with the performance and reliability of a data warehouse — letting data teams run everything from large-scale ETL to collaborative notebooks and MLOps pipelines on one platform, across AWS, Azure, and GCP.
+description: |
+  ## 💡 Core Capabilities
+
+  | Capability                | Description                                                                                      |
+  |--------------------------|------------------------------------------------------------------------------------------------|
+  | **⚡ Apache Spark Engine**   | Managed, auto-scaling Spark clusters for distributed data processing.                            |
+  | **🏞️ Lakehouse (Delta Lake)** | ACID transactions, schema enforcement, and time travel on top of cloud object storage.        |
+  | **📓 Collaborative Notebooks** | Shared notebooks supporting Python, SQL, Scala, and R in one workspace.                       |
+  | **🤖 MLflow Integration**    | Native experiment tracking, model registry, and deployment built into the platform.             |
+  | **🗄️ Unity Catalog**        | Centralized governance, access control, and lineage across all data and AI assets.               |
+  | **🔄 Workflows & Jobs**      | Orchestrate multi-task pipelines with scheduling, retries, and monitoring.                       |
+
+  ---
+
+  ## 🎯 Key Use Cases
+
+  Databricks is used by data engineers, analysts, and ML teams who need one platform for the full data lifecycle:
+
+  - **🔄 Large-Scale ETL & Data Engineering**: Ingest, transform, and clean massive datasets with Spark and Delta Lake.
+
+  - **🤖 Machine Learning & MLOps**: Train, track, and deploy models at scale with built-in MLflow support.
+
+  - **📊 BI & SQL Analytics**: Run SQL-based dashboards and reporting directly on lakehouse data via Databricks SQL.
+
+  - **🧠 Generative AI & LLM Workloads**: Fine-tune, serve, and govern LLMs alongside traditional data pipelines.
+
+  ---
+
+  ## 🌟 Why People Use Databricks
+
+  - **Unified Platform**: Eliminates the split between data lake and data warehouse — one system for engineering, analytics, and AI.
+
+  - **Built by Spark's Creators**: Deep, first-party optimization of Apache Spark for performance and reliability.
+
+  - **Open Formats**: Delta Lake, Parquet, and MLflow are open-source, reducing vendor lock-in.
+
+  - **Enterprise Governance**: Unity Catalog provides fine-grained access control and lineage across clouds.
+
+  ---
+
+  ## 🔗 Integration with Other Tools
+
+  Databricks connects natively with the broader data and AI ecosystem:
+
+  - **☁️ Cloud Providers**: Deploys natively on AWS, Azure (as Azure Databricks), and Google Cloud.
+
+  - **🔄 Orchestration**: Integrates with `Airflow`, `dbt`, and native Databricks Workflows for pipeline scheduling.
+
+  - **🐍 Python & ML Ecosystem**: First-class support for `pandas`, `PySpark`, `scikit-learn`, `PyTorch`, and `Hugging Face`.
+
+  - **📊 BI Tools**: Connects to `Tableau`, `Power BI`, and `Looker` via Databricks SQL endpoints.
+
+  ---
+
+  ## ⚙️ Technical Overview
+
+  Databricks runs managed Spark clusters on top of your cloud storage, orchestrated through a collaborative workspace.
+
+  - **🖥️ Workspace**: Notebooks, jobs, and dashboards shared across a team.
+  - **🔥 Compute Clusters**: Auto-scaling, auto-terminating Spark clusters (or serverless compute).
+  - **🏞️ Delta Lake**: The storage layer providing ACID transactions and versioning on data lake files.
+  - **📦 Unity Catalog**: A unified metastore for governing tables, files, models, and permissions.
+
+  ---
+
+  ## 🐍 Python Example
+
+  Here's a simple example using PySpark and Delta Lake inside a Databricks notebook:
+
+  ```python
+  from pyspark.sql import SparkSession
+  from pyspark.sql.functions import col
+
+  spark = SparkSession.builder.getOrCreate()
+
+  df = spark.read.csv("/mnt/data/sales.csv", header=True, inferSchema=True)
+
+  cleaned = df.filter(col("amount") > 0).withColumnRenamed("amount", "sale_amount")
+
+  cleaned.write.format("delta").mode("overwrite").saveAsTable("sales_cleaned")
+
+  result = spark.sql("SELECT * FROM sales_cleaned ORDER BY sale_amount DESC LIMIT 10")
+  result.show()
+  ```
+
+  ---
+
+  ## 🏆 Competitors & Pricing
+
+  | Provider              | Strengths                                       | Pricing (Approx.)                        |
+  |------------------------|--------------------------------------------------|-------------------------------------------|
+  | **Databricks**         | Unified lakehouse, Spark-native, strong MLOps     | Usage-based (DBUs) + underlying cloud costs |
+  | **Snowflake**          | Strong SQL warehousing, simple pricing model      | Usage-based, credits per compute-second   |
+  | **AWS EMR**            | Flexible, cheaper raw Spark hosting               | Pay-as-you-go, more manual setup           |
+  | **Google BigQuery**    | Serverless SQL analytics at scale                 | Usage-based, per-query or flat-rate slots |
+
+  > **Note:** Databricks pricing is based on **Databricks Units (DBUs)** consumed by compute, in addition to the underlying cloud provider's infrastructure costs.
+
+  ---
+
+  ## 🐍 Python Ecosystem Relevance
+
+  - **PySpark:** Databricks is the primary managed environment for running PySpark at scale.
+  - **MLflow:** Originated at Databricks and integrated natively for experiment tracking and model serving.
+  - **Data Science Libraries:** `pandas`, `scikit-learn`, and `Koalas`/pandas API on Spark all run within Databricks notebooks.
+  - **LLM Tooling:** Supports `Hugging Face Transformers` and vector search for building retrieval-augmented generation (RAG) pipelines.
+
+  ---
+
+  ## 🔚 Summary
+
+  **Databricks** brings data engineering, analytics, and machine learning together on a single **lakehouse platform** built on Apache Spark and Delta Lake. Its combination of scalable compute, open storage formats, built-in MLOps via MLflow, and unified governance through Unity Catalog make it a leading choice for organizations that want to run their entire data and AI lifecycle without stitching together separate systems.
